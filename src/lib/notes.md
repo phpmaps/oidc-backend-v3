@@ -1,0 +1,1 @@
+http://localhost:3000/auth?response_type=code&redirect_uri=http://localhost:8080&scope=profile&client_id=ping
