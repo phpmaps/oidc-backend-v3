@@ -7,7 +7,7 @@ export default {
       client_id: process.env.OIDC_CLIENT_ID,
       client_secret: process.env.OIDC_SECRET,
       grant_types: ['refresh_token', 'authorization_code'],
-      redirect_uris: [process.env.OIDC_REDIRECT_1, process.env.OIDC_REDIRECT_2, process.env.OIDC_REDIRECT_3, process.env.OIDC_REDIRECT_4, process.env.OIDC_REDIRECT_5],
+      redirect_uris: [process.env.OIDC_REDIRECT_1, process.env.OIDC_REDIRECT_2, process.env.OIDC_REDIRECT_3],
     }
   ],
 
