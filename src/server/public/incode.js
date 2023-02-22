@@ -22,10 +22,6 @@ function postwith(to, p) {
     myForm.method = "post";
     myForm.action = to;
     for (var k in p) {
-        console.log({
-            key: k,
-            value: p[k]
-        })
         var myInput = document.createElement("input");
         myInput.setAttribute("name", k);
         myInput.setAttribute("value", p[k]);
@@ -38,30 +34,19 @@ function postwith(to, p) {
 
 
 flow = JSON.parse(document.getElementById('gov_id_selfie').value);
-console.log(flow.url);
-
 
 async function heartbeat(f) {
     const statusUrl = `${flow.apiUrl}/omni/get/onboarding/status?id=${flow.interviewId}`;
     const results = await doGet(statusUrl);
-    console.log(results.onboardingStatus);
     if (results.onboardingStatus === 'ONBOARDING_FINISHED') {
         setTimeout(() => {
             const uuid = document.getElementById('uuid').value;
-            console.log({
-                uuid: uuid,
-                id: flow.token,
-                interview: flow.interviewId,
-                url: `/interaction/${uuid}/login`
-            });
 
-            postwith(`http://localhost:3000/interaction/${uuid}/login`, {
+            postwith(`/interaction/${uuid}/login`, {
                 id: flow.token,
                 interview: flow.interviewId
             });
-            console.log("Finished")
         }, 6000)
 
     }
 }
-

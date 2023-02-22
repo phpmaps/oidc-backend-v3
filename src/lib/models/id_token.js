@@ -73,7 +73,6 @@ export default function getIdToken(provider) {
 
       switch (use) {
         case 'idtoken':
-          console.log(":::id_token:idtoken")
           alg = client.idTokenSignedResponseAlg;
           signOptions = {
             audience: client.clientId,

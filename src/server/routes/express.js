@@ -66,24 +66,10 @@ export default (app, provider) => {
 
       switch (prompt.name) {
         case 'login': {
-          //res.set("Content-Security-Policy", "frame-src 'https://demo-api.incodesmile.com' 'https://ping.incodedemo.com' 'http://localhost:3000'")
-          //res.set("Content-Security-Policy", "script-src 'https://api.i18nexus.com' 'https://demo-api.incodesmile.com' 'https://ping.incodedemo.com' 'http://localhost:3000'")
-
-          // res.setHeader(
-          //   'Content-Security-Policy-Report-Only',
-          //   "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' https://api.i18nexus.com https://demo-api.incodesmile.com; style-src 'self' https://api.i18nexus.com https://demo-api.incodesmile.com; frame-src 'self';"
-          // );
-          //TODO: Doogs remove hardcoded clientId
-          
           if (client.clientId === process.env.OIDC_CLIENT_ID) {
-            console.log("FLOW")
-            console.log(process.env.FLOW_ID)
-            const frontendHostname = process.env.GSA_HOSTNAME;
+            const frontendHostname = process.env.FRONTEND_HOSTNAME;
             const flow = await init(process.env.FLOW_ID);
             const iid = flow.interviewId;
-            console.log(flow);
-            console.log("iid iid iid iid")
-            console.log(iid)
             const flows = {
               gov_id_selfie: JSON.stringify(flow)
             }
@@ -149,25 +135,18 @@ export default (app, provider) => {
 
   app.post('/interaction/:uid/login', setNoCache, body, async (req, res, next) => {
     try {
-      const temp = await provider.interactionDetails(req, res);
-      console.log(":::interactionDetails")
-      console.log(temp);
+      //TODO: Doogs monitor this.
+      // const temp = await provider.interactionDetails(req, res);
+      // console.log(":::interactionDetails")
+      // console.log(temp);
       const { grantId, params, prompt: { name } } = await provider.interactionDetails(req, res);
       assert.equal(name, 'login');
 
-      //TODO: Doogs clean up print statement w/ interviewId
-      console.log({
-        token: req.body.id,
-        interviewId: req.body.interview
-      })
-
+    
       const account = await Account.findByLogin({
         token: req.body.id,
         interviewId: req.body.interview
       });
-
-      
-      //grant.addOIDCScope('oidc');
 
       let grant;
       if (grantId) {
@@ -188,7 +167,6 @@ export default (app, provider) => {
         },
       };
 
-      console.log(":::interactionFinished")
       await provider.interactionFinished(req, res, result, { mergeWithLastSubmission: false });
     } catch (err) {
       next(err);

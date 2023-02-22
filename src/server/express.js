@@ -42,7 +42,6 @@ try {
     provider.proxy = true;
 
     if (prod) {
-        console.log('trust proxy')
         app.enable('trust proxy');
         provider.proxy = true;
 

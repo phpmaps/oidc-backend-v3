@@ -13,7 +13,7 @@ const auth = new Auth();
 (async () => {
     const header = await auth.getLoginHeader();
     const scores = await getScores(interviewId, header);
-    const ocr = await getOcr(interviewId, header)
-    const data = { ...scores.body, ...ocr.body };
-    console.log(flatten(data));
+    const ocr = await getOcr(interviewId, header);
+    //TODO: Make results aligned to study spec
+    const data = { ...scores.body };
 })();
