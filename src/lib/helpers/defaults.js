@@ -6,7 +6,6 @@ import * as util from 'node:util';
 import * as os from 'node:os';
 
 //import MemoryAdapter from '../adapters/memory_adapter.js';
-//import RedisAdapter from '../adapters/redis_rejson.js';
 import RedisStoreAdapter from '../adapters/redis.js';
 import { DEV_KEYSTORE } from '../consts/index.js';
 
