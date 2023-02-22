@@ -27,6 +27,8 @@ export class Auth {
     }
 
     async getSessionHeader() {
+        console.log("FLOWID")
+        console.log(this.flowId);
         this.auth = await start(this.flowId);
         this.token = this.auth.token;
         this.interviewId = this.auth.interviewId;

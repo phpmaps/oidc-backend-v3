@@ -2,199 +2,33 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="mobile-web-app-capable" content="yes">
-  <!-- <link rel="stylesheet" href="./assets/style.css">
-  <link rel="stylesheet" href="./assets/css/uswds.css"> -->
-
-  <title>
-    Incode | Equity Study
-  </title>
-
-  <style>
-    body {
-      width: 100vw;
-      height: 100vh;
-      padding: 0;
-      margin: 0;
-      background-color: #ebf3fa;
-      font-family: Public Sans Web, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    .banner-thin {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0;
-      margin: 0;
-      text-align: center;
-    }
-
-    .banner-thin div {
-      font-size: .75rem;
-      padding: 2px;
-      margin: 0;
-      color: #fff;
-      width: 100%;
-      background-color: #112e51;
-      ;
-    }
-
-    .qr-section-none {
-      display: none;
-    }
-
-    .qr-section {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      margin: 0;
-      visibility: hidden;
-    }
-
-    .radios-none {
-      display: none;
-    }
-
-    .radios {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      margin: 0;
-    }
-
-    .inc-btn2 {
-      margin-top: 40px;
-      font-family: Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
-      font-size: 1.06rem;
-      color: #FFF;
-      border-radius: 0.25rem;
-      border: 2px solid #005ea2;
-      background-color: #005ea2;
-      padding: 0.75rem 1.25rem;
-    }
-
-    .root {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-      padding: 0;
-      margin: 0;
-      display: none;
-    }
-
-    .qr-adjust {
-      margin-bottom: 1px;
-    }
-
-    .timer {
-      margin-top: 10px;
-    }
-
-    .top-buffer {
-      margin-top: 40px;
-    }
-
-    .top-buffer-less {
-      margin-top: 10px;
-    }
-
-    .buffer {
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-
-  </style>
-  <link rel="shortcut icon" href="/ic.webp">
-  <link href="/client.bd129c4516c639d0e071.css" rel="stylesheet">
+    <title>Equity Study</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-  <noscript>No JavaScript</noscript>
-  <section class="banner-thin">
-    <div>Digital experiences to protect identities beyond passwords</div>
-  </section>
+    <iframe title="onboarding" src="<%= frontendHostname %>?id=<%= iid %>" height="667" width="375" frameborder="0" allowusermedia
+        allow="camera;" style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+    "></iframe>
 
-  <div class="inc-middleish">
-
-    <!-- <p class="inc-subheading">OIDC and Ping Integration Testing from Incode</p> -->
-
-    <div id="radios" class="radios">
-      <h3 class="top-buffer site-preview-heading">Select a flow</h3>
-      <form class="usa-form">
-        <fieldset class="usa-fieldset">
-          <div class="usa-radio">
-            <input class="usa-radio__input usa-radio__input--tile" id="id-selfie" type="radio" name="flows"
-              value="id-selfie">
-            <label class="usa-radio__label" for="id-selfie">
-              Document + Selfie
-              <span class="usa-checkbox__label-description">Includes phone, email, ID capture and face capture
-                modules.</span>
-            </label>
-          </div>
-          <div class="usa-radio">
-            <input class="usa-radio__input usa-radio__input--tile" id="selfie" type="radio" name="flows" value="selfie">
-            <label class="usa-radio__label" for="selfie">Phone + Selfie
-              <span class="usa-checkbox__label-description">Includes phone and face capture modules.</span></label>
-          </div>
-         <!--  <div class="usa-radio">
-            <input class="usa-radio__input usa-radio__input--tile" id="face-login" type="radio" name="flows"
-              value="face-login">
-            <label class="usa-radio__label" for="face-login">
-              Face Login
-              <span class="usa-checkbox__label-description">Includes 1:1 face login module.</span>
-            </label>
-          </div> -->
-        </fieldset>
-      </form>
-
-      <button id="nextBtn" class="top-buffer usa-button usa-button--active">Next</button>
-
-    </div>
-
-    <div id="qr-section" class="qr-section">
-      
-      <h3 class="top-buffer qr-adjust site-preview-heading">Scan QR to verify</h3>
-
-      <div id="container"></div>
-
-      <button id="backBtn" class="top-buffer-less usa-button usa-button--active">Back</button>
-
-      <div class="top-buffer timer">Time remaining: <span id="timer"></span></div>
-    </div>
-
-    <div id="root" class="root"></div>
     <input type="hidden" id="uuid" value="<%= uid %>" />
-    <input type="hidden" id="gov_selfie" value="<%= flows.gov_selfie %>" />
-    <input type="hidden" id="phone_selfie" value="<%= flows.phone_selfie %>" />
-    <input type="hidden" id="face_login" value="<%= flows.face_login %>" />
+    <input type="hidden" id="gov_id_selfie" value="<%= flows.gov_id_selfie %>" />
 
-  </div>
 
-  <script src="/qrcode.js"></script>
-  <script type="text/javascript" src="/incode.js"></script>
-  <script type="text/javascript" src="/client.7f840bb6e2268c665878.js"></script>
-  <script type="text/javascript" src="/npm.process.468960a2e2c11feacbfe.chunk.js"></script>
-  <script type="text/javascript" src="/npm.react.a3aa1cdb4b6dd41c4475.chunk.js"></script>
-  <script type="text/javascript" src="/npm.react-dom.ad71891a4e12bceed56f.chunk.js"></script>
-  <script type="text/javascript" src="/npm.scheduler.d8d21e165078277450f2.chunk.js"></script>
-  <script type="text/javascript" src="/npm.setimmediate.9c392a59b1fd82d8bf4c.chunk.js"></script>
-  <script type="text/javascript" src="/npm.timers-browserify.00337b1867cfe66f5145.chunk.js"></script>
-  <script type="text/javascript" src="/npm.webpack.093f6ca7b46184ea0337.chunk.js"></script>
+    <script type="text/javascript" src="/incode.js"></script>
 </body>
 
 </html>

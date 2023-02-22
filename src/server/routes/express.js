@@ -66,24 +66,35 @@ export default (app, provider) => {
 
       switch (prompt.name) {
         case 'login': {
-          res.set("Content-Security-Policy", "connect 'https://demo-api.incodesmile.com' 'https://ping.incodedemo.com' 'http://localhost:3000'")
+          //res.set("Content-Security-Policy", "frame-src 'https://demo-api.incodesmile.com' 'https://ping.incodedemo.com' 'http://localhost:3000'")
+          //res.set("Content-Security-Policy", "script-src 'https://api.i18nexus.com' 'https://demo-api.incodesmile.com' 'https://ping.incodedemo.com' 'http://localhost:3000'")
 
+          // res.setHeader(
+          //   'Content-Security-Policy-Report-Only',
+          //   "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self' https://api.i18nexus.com https://demo-api.incodesmile.com; style-src 'self' https://api.i18nexus.com https://demo-api.incodesmile.com; frame-src 'self';"
+          // );
           //TODO: Doogs remove hardcoded clientId
           
-          if (client.clientId === 'ping') {
-            const gov_selfie = await init('63bbad0e38905700e07376dd');
-            const phone_selfie = await init('63bbae1638905700e07377da');
-            const face_login = await init('63bbae825b09e48e03781938');
+          if (client.clientId === process.env.OIDC_CLIENT_ID) {
+            console.log("FLOW")
+            console.log(process.env.FLOW_ID)
+            const frontendHostname = process.env.GSA_HOSTNAME;
+            const flow = await init(process.env.FLOW_ID);
+            const iid = flow.interviewId;
+            console.log(flow);
+            console.log("iid iid iid iid")
+            console.log(iid)
             const flows = {
-              gov_selfie: JSON.stringify(gov_selfie),
-              phone_selfie: JSON.stringify(phone_selfie),
-              face_login: JSON.stringify(face_login)
+              gov_id_selfie: JSON.stringify(flow)
             }
+
 
             return res.render('login', {
               client,
+              frontendHostname,
               uid,
               flows,
+              iid,
               details: prompt.details,
               params,
               title: 'Sign-in',
@@ -95,6 +106,8 @@ export default (app, provider) => {
             });
 
           } else {
+
+            //TODO: Create visual error screen for unrecognized clientId.
 
             return res.render('login', {
               client,
@@ -136,6 +149,9 @@ export default (app, provider) => {
 
   app.post('/interaction/:uid/login', setNoCache, body, async (req, res, next) => {
     try {
+      const temp = await provider.interactionDetails(req, res);
+      console.log(":::interactionDetails")
+      console.log(temp);
       const { grantId, params, prompt: { name } } = await provider.interactionDetails(req, res);
       assert.equal(name, 'login');
 
@@ -172,6 +188,7 @@ export default (app, provider) => {
         },
       };
 
+      console.log(":::interactionFinished")
       await provider.interactionFinished(req, res, result, { mergeWithLastSubmission: false });
     } catch (err) {
       next(err);
@@ -238,7 +255,7 @@ export default (app, provider) => {
 
   app.use((err, req, res, next) => {
     //if (err instanceof SessionNotFound) {
-    console.log(":::catch all error route");
+    console.log("Error catch mode.");
     console.log(err);
     // handle interaction expired / session not found error
     //}
