@@ -57,7 +57,6 @@
         "quick-lru": "^6.1.1",
         "raw-body": "^2.5.1",
         "redis": "^4.6.4",
-        "redis-cli": "^2.1.2",
         "redis-json": "^6.0.3"
     },
     "devDependencies": {
