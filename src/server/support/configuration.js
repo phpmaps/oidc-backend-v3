@@ -1,4 +1,7 @@
 export default {
+
+  //START - HERE IS WHERE OIDC CLIENTS CAN BE CONFIGURED
+
   clients: [
     {
       client_id: process.env.OIDC_CLIENT_ID,
@@ -7,6 +10,9 @@ export default {
       redirect_uris: [process.env.OIDC_REDIRECT_1, process.env.OIDC_REDIRECT_2, process.env.OIDC_REDIRECT_3, process.env.OIDC_REDIRECT_4, process.env.OIDC_REDIRECT_5],
     }
   ],
+
+  //END
+
   scopes: [
     'openid',
     'offline_access'
@@ -22,30 +28,25 @@ export default {
   cookies: {
     keys: ['some secret key', 'and also the old rotated away some time ago', 'and one more'],
   },
-  //TODO: Doogs discuss with Raju.  Find out if these need to match incode results.
   claims: {
-    address: ['address'],
-    email: ['email', 'email_verified'],
-    phone: ['phone_number', 'phone_number_verified'],
-    profile: ['profile'],
+    profile: ['profile', 'id', 'livenessScore_value', 'livenessScore_status', 'photoQuality_value', 'liveness_overall_value', 'liveness_overall_status', 'overall_value', 'overall_status', 'overall_reason'],
   },
   features: {
-    devInteractions: { enabled: false }, // defaults to true
+    devInteractions: { enabled: false },
     clientCredentials: { enabled: true },
-    deviceFlow: { enabled: true }, // defaults to false
-    revocation: { enabled: true }, // defaults to false
+    deviceFlow: { enabled: true },
+    revocation: { enabled: true },
   },
   ttl: {
-    //TODO: Doogs can we clear these unused comments
-    // Session: 24 * 60 * 60,//3600,
-    // Interaction: 24 * 60 * 60,//3600,
-    AccessToken: 24 * 60 * 60,//3600,
-    AuthorizationCode: 24 * 60 * 60,//600,
-    ClientCredentials: 24 * 60 * 60,//600,
-    DeviceCode: 24 * 60 * 60,//600,
-    IdToken: 24 * 60 * 60,//3600,
-    RefreshToken: 24 * 60 * 60,//1209600,
-    Grant: 24 * 60 * 60,//1209600,   Azas
+    Session: 24 * 60 * 60,
+    Interaction: 24 * 60 * 60,
+    AccessToken: 24 * 60 * 60,
+    AuthorizationCode: 24 * 60 * 60,
+    ClientCredentials: 24 * 60 * 60,
+    DeviceCode: 24 * 60 * 60,
+    IdToken: 24 * 60 * 60,
+    RefreshToken: 24 * 60 * 60,
+    Grant: 24 * 60 * 60,
   },
   jwks: {
     keys: [
