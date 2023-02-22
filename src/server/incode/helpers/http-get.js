@@ -25,6 +25,7 @@ export const doGet = async (url, headers, params) => {
         payload.error = e;
         payload.body = json;
         payload.index = url;
+        console.log(`Attention:  HTTPGET error.`);
         console.log(payload);
         return payload;
     }

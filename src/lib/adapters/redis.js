@@ -4,14 +4,6 @@ import Redis from 'ioredis'; // eslint-disable-line import/no-unresolved
 import isEmpty from 'lodash/isEmpty.js';
 dotenv.config();
 
-//const client = new Redis(process.env.REDIS_URL, { keyPrefix: 'oidc:' });
-
-console.log({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
-    password: process.env.REDIS_PASSWORD
-});
-
 const client = new Redis(
     process.env.REDIS_HOST,
     process.env.REDIS_PORT,

@@ -384,7 +384,7 @@ async function logoutSource(ctx, form) {
 }
 
 async function renderError(ctx, out, error) {
-  console.log(":::Error!");
+  console.log(":::Attention, error happened.");
   console.log(error);
   shouldChange('renderError', 'customize the look of the error page');
   ctx.type = 'html';

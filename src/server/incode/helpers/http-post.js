@@ -24,6 +24,7 @@ export const doPost = async (url, headers, params) => {
         payload.error = e;
         payload.body = json;
         payload.index = url;
+        console.log(`Attention:  HTTPPOST error.`);
         console.log(payload);
         return payload;
     }

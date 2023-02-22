@@ -34,42 +34,28 @@ if (!lts || lts.charCodeAt(0) < minimum.charCodeAt(0)) {
 
 async function getInteraction(req, res) {
   const ctx = this.app.createContext(req, res);
-  console.log(":::getinteraction1")
   const id = ssHandler.get(
     ctx.cookies,
     this.cookieName('interaction'),
     instance(this).configuration('cookies.short'),
   );
-  console.log(":::getinteraction2")
   if (!id) {
-    console.log(":::getinteraction3")
     throw new SessionNotFound('interaction session id cookie not found');
   }
-  console.log(":::getinteraction4")
   const interaction = await this.Interaction.find(id);
-  console.log(":::getinteraction5")
   if (!interaction) {
-    console.log(":::getinteraction6")
     //throw new SessionNotFound('interaction session not found');
   }
 
-
   if (interaction?.session?.uid) {
-    console.log(":::getinteraction7")
     const session = await this.Session.findByUid(interaction.session.uid);
-    console.log(":::getinteraction8")
     if (!session) {
-      console.log(":::getinteraction9")
       throw new SessionNotFound('session not found');
     }
     if (interaction.session.accountId !== session.accountId) {
-      console.log(":::getinteraction10")
       throw new SessionNotFound('session principal changed');
     }
   }
-  console.log(":::getinteraction10")
-  console.log(interaction);
-
   return interaction;
 }
 
