@@ -9,8 +9,12 @@ export const fetchResults = async (interviewId, token) => {
     const header = Auth.createHeader(token);
     const scores = await getScores(interviewId, header);
     
-    const ocr = await getOcr(interviewId, header)
-    const data = { ...scores, ...ocr.body };
+    //const ocr = await getOcr(interviewId, header)
+    
+    //TODO: Doogs -Format results per study requirements
+    //TODO: Action item on retention and results
+
+    const data = { ...scores };
     const flattenData = flatten(data);
     return flattenData;
 

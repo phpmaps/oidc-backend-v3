@@ -62,7 +62,7 @@ export default async function interactions(resumeRouteName, ctx, next) {
     // when no scope parameter was provided and none is injected by the AS policy access is
     // denied rather then issuing a code/token without scopes
     if (
-      !oidc.grant.getOIDCScopeFiltered(oidc.requestParamOIDCScopes)
+      !oidc.grant?.getOIDCScopeFiltered(oidc.requestParamOIDCScopes)
       && Object.keys(ctx.oidc.resourceServers)
         .every(
           (resource) => !oidc.grant.getResourceScopeFiltered(resource, oidc.requestParamScopes),
