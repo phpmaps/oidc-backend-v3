@@ -23,14 +23,11 @@ class Account {
   async claims(use, scope) { // eslint-disable-line no-unused-vars
 
     if (this.profile) {
-      console.log(":::Results has profile")
       return {
         sub: this.accountId, // it is essential to always return a sub claim
       };
     }
 
-    //TODO: Doogs need to make sure this.session works in CF
-    console.log(":::Results no profile")
     const results = await fetchResults(this.session.interviewId, this.session.token);
     results.sub = this.accountId;
     this.profile = results;
@@ -60,7 +57,6 @@ class Account {
     // token is a reference to the token used for which a given account is being loaded,
     //   it is undefined in scenarios where account claims are returned from authorization endpoint
     // ctx is the koa request context
-    console.log(":::findAccount");
     if (!store.get(id)) new Account(id); // eslint-disable-line no-new
     return store.get(id);
   }

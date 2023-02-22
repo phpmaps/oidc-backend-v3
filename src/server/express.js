@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 
 import { dirname } from 'desm';
 import express from 'express'; // eslint-disable-line import/no-unresolved
-import helmet from 'helmet';
+
 
 import Provider from '../lib/index.js'; // from 'oidc-provider';
 
@@ -21,17 +21,7 @@ const { PORT = 3000, ISSUER = process.env.OIDC_ISSUER } = process.env;
 configuration.findAccount = Account.findAccount;
 
 const app = express();
-//app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
-
-const directives = helmet.contentSecurityPolicy.getDefaultDirectives();
-delete directives['form-action'];
-app.use(helmet({
-    contentSecurityPolicy: {
-        useDefaults: false,
-        directives,
-    },
-}));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
